@@ -1,6 +1,7 @@
 extends RigidBody2D
 
-var speed = 100
+var hp = 5
+var speed = 200
 var turning_speed = 200
 var thrust = Vector2()
 var rotation_direction = 0
