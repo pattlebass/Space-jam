@@ -1,36 +1,54 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/bg.png" type="Texture" id=1]
-[ext_resource path="res://player.gd" type="Script" id=2]
-[ext_resource path="res://assets/player/player.png" type="Texture" id=3]
-[ext_resource path="res://assets/enemies/enemy1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game.gd" type="Script" id=1]
+[ext_resource path="res://assets/enemies/enemy1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/enemies/enemy2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/bg.png" type="Texture" id=4]
+[ext_resource path="res://player.gd" type="Script" id=5]
+[ext_resource path="res://assets/bullet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/player/player.png" type="Texture" id=7]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5, 5 )
 
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+adjustment_brightness = 0.01
+
 [node name="game" type="Node2D"]
+script = ExtResource( 1 )
+enemy1_scene = ExtResource( 2 )
+enemy2_scene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 150, 80 )
-texture = ExtResource( 1 )
+material = SubResource( 1 )
+texture = ExtResource( 4 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 5000 )
+region_rect = Rect2( 0, 0, 3000, 3000 )
 
 [node name="player" type="RigidBody2D" parent="."]
 position = Vector2( 140, 70 )
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 2.0
-script = ExtResource( 2 )
+script = ExtResource( 5 )
+bullet_scene = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="player"]
+material = SubResource( 2 )
 rotation = 1.5708
 scale = Vector2( 0.08, 0.08 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 current = true
@@ -40,5 +58,38 @@ drag_margin_v_enabled = false
 [node name="Position2D" type="Position2D" parent="player"]
 position = Vector2( 10, 0 )
 
-[node name="enemy1" parent="." instance=ExtResource( 4 )]
-position = Vector2( 114.272, 108.225 )
+[node name="Timer" type="Timer" parent="player"]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[node name="enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 50.7731, 53.3125 )
+rotation = 1.5708
+
+[node name="enemy1" parent="." instance=ExtResource( 2 )]
+position = Vector2( 170.62, 145.79 )
+
+[node name="enemy3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 218.784, 69.2257 )
+
+[node name="enemy4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 94.2222, 79.6889 )
+
+[node name="enemy5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 249.012, 79.5228 )
+
+[node name="enemy6" parent="." instance=ExtResource( 2 )]
+position = Vector2( 120.463, 137.486 )
+
+[node name="enemy7" parent="." instance=ExtResource( 2 )]
+position = Vector2( 214.134, 139.811 )
+
+[node name="enemy8" parent="." instance=ExtResource( 2 )]
+position = Vector2( 74.4584, 103.771 )
+
+[node name="enemy9" parent="." instance=ExtResource( 2 )]
+position = Vector2( 199.851, 109.252 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 4 )
