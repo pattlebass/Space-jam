@@ -5,8 +5,13 @@ export (PackedScene) var bullet_scene
 func _ready():
 	$Timer.start(rand_range(2, 3))
 	randomize()
-	speed = 30
 	damage = 1
+
+func _process(_delta):
+	if global_position.distance_to(player.global_position) <= 50:
+		speed = 0
+	else:
+		speed = 30
 
 func _on_Timer_timeout():
 	if global_position.distance_to(player.global_position) <= 150:

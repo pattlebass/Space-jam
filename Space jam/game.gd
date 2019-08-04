@@ -4,6 +4,7 @@ var enemies = 0
 onready var player = $player
 export (PackedScene) var enemy1_scene
 export (PackedScene) var enemy2_scene
+export (PackedScene) var enemy3_scene
 var zoomed = false
 
 func _ready():
@@ -28,10 +29,13 @@ func _process(_delta):
 			if distance_to_player < 700 && distance_to_player > 150:
 				enemies += 1
 				var enemy_chosen
-				if randi()%2 == 1:
+				var random_enemy = randi()%3
+				if random_enemy == 0:
 					enemy_chosen = enemy1_scene
-				else:
+				elif random_enemy == 1:
 					enemy_chosen = enemy2_scene
+				elif random_enemy == 2:
+					enemy_chosen = enemy3_scene
 				var enemy = enemy_chosen.instance()
 				add_child(enemy)
 				enemy.position = spawn_position

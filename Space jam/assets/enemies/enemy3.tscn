@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/enemies/enemy3.gd" type="Script" id=1]
+[ext_resource path="res://assets/bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/enemies/1.png" type="Texture" id=3]
+
+[node name="enemy3" type="KinematicBody2D"]
+script = ExtResource( 1 )
+bullet_scene = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -0.122623, -5.12793, -5.74961, -1.20609, -3.53292, 4.93245, 3.20242, 4.93245, 5.33385, -1.29134 )
+
+[node name="0" type="Position2D" parent="."]
+position = Vector2( -0.0852547, -4.77442 )
+rotation = 4.71239
+
+[node name="1" type="Position2D" parent="."]
+position = Vector2( -5.45647, -1.10835 )
+rotation = -3.14159
+
+[node name="2" type="Position2D" parent="."]
+position = Vector2( -3.58081, 4.43338 )
+rotation = 2.0944
+
+[node name="3" type="Position2D" parent="."]
+position = Vector2( 3.15453, 4.68916 )
+rotation = 1.0812
+
+[node name="4" type="Position2D" parent="."]
+position = Vector2( 4.85968, -1.02309 )
