@@ -1,19 +1,30 @@
 extends Node2D
 
 var enemies = 0
+onready var player = $player
 export (PackedScene) var enemy1_scene
 export (PackedScene) var enemy2_scene
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	for i in 300:
-		enemies += 1
-		var enemy1 = enemy1_scene.instance()
-		add_child(enemy1)
-		enemy1.position = Vector2(rand_range(-1500, 1500), rand_range(-1500, 1500))
-	for i in 300:
-		enemies += 1
-		var enemy2 = enemy2_scene.instance()
-		add_child(enemy2)
-		enemy2.position = Vector2(rand_range(-1500, 1500), rand_range(-1500, 1500))
+
+func _process(_delta):
+	$ui/HP.text = str(player.hp)
+	$ui/enemies.text = str(enemies)
+	if enemies < 70:
+		var repeats = 70 - enemies
+		for i in repeats:
+			var x = rand_range(-1500, 1500)
+			var y = rand_range(-1500, 1500)
+			var spawn_position = Vector2(x, y)
+			var distance_to_player = spawn_position.distance_to(player.global_position)
+			if distance_to_player < 700 && distance_to_player > 250:
+				enemies += 1
+				var enemy_chosen
+				if randi()%2 == 1:
+					enemy_chosen = enemy1_scene
+				else:
+					enemy_chosen = enemy2_scene
+				var enemy = enemy_chosen.instance()
+				add_child(enemy)
+				enemy.position = spawn_position

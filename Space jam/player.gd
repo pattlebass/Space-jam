@@ -24,6 +24,7 @@ func movement():
 		bullet.rotation = rotation
 		bullet.parent_type = "player"
 		bullet.damage = damage
+		bullet.modulate = $Sprite.modulate
 
 	#if Input.is_action_pressed("left"):
 	#	rotation_direction = -1

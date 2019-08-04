@@ -3,7 +3,7 @@ extends "res://assets/enemies/enemy1.gd"
 export (PackedScene) var bullet_scene
 
 func _ready():
-	$Timer.start(rand_range(1, 2))
+	$Timer.start(rand_range(2, 3))
 	randomize()
 	speed = 30
 	damage = 1
@@ -16,4 +16,4 @@ func _on_Timer_timeout():
 		bullet.rotation = rotation
 		bullet.damage = damage
 		bullet.parent_type = "enemy"
-	$Timer.start(rand_range(1, 2))
+	$Timer.start(rand_range(2, 3))
