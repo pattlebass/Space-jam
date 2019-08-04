@@ -4,11 +4,18 @@ var enemies = 0
 onready var player = $player
 export (PackedScene) var enemy1_scene
 export (PackedScene) var enemy2_scene
+var zoomed = false
 
 func _ready():
 	randomize()
 
 func _process(_delta):
+	if Input.is_action_just_pressed("zoom"):
+		zoomed = !zoomed
+		if zoomed == false:
+			$player/Camera2D.zoom = Vector2(8, 8)
+		else:
+			$player/Camera2D.zoom = Vector2(1, 1)
 	$ui/HP.text = str(player.hp)
 	$ui/enemies.text = str(enemies)
 	if enemies < 70:
@@ -18,7 +25,7 @@ func _process(_delta):
 			var y = rand_range(-1500, 1500)
 			var spawn_position = Vector2(x, y)
 			var distance_to_player = spawn_position.distance_to(player.global_position)
-			if distance_to_player < 700 && distance_to_player > 250:
+			if distance_to_player < 700 && distance_to_player > 150:
 				enemies += 1
 				var enemy_chosen
 				if randi()%2 == 1:
