@@ -27,8 +27,8 @@ func _process(_delta):
 			$player/Camera2D.zoom = Vector2(6, 6)
 		else:
 			$player/Camera2D.zoom = Vector2(1, 1)
-	if enemies < 70:
-		var repeats = 70 - enemies
+	if enemies < 100:
+		var repeats = 100 - enemies
 		for i in repeats:
 			var x = rand_range(-1500, 1500)
 			var y = rand_range(-1500, 1500)

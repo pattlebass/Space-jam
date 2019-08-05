@@ -27,7 +27,6 @@ func _on_Area2D_body_entered(body):
 	destroy()
 	
 func destroy():
-	print(sides)
 	var particle_scene = preload("res://assets/particles.tscn")
 	var particle = particle_scene.instance()
 	get_parent().add_child(particle)

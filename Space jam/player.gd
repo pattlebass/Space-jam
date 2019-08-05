@@ -36,8 +36,9 @@ func get_input():
 	#	rotation_direction = 1
 	#else:
 	#	rotation_direction = 0
-	look_at(get_global_mouse_position())
+	
 func _integrate_forces(state):
+	look_at(get_global_mouse_position())
 	set_applied_force(thrust.rotated(rotation))
 	#set_applied_torque(rotation_direction * turning_speed)
 func destroy():

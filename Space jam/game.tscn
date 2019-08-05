@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/enemy1.tscn" type="PackedScene" id=2]
@@ -83,6 +83,12 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="SegmentShape2D" id=8]
+b = Vector2( 0, 3000 )
+
+[sub_resource type="SegmentShape2D" id=9]
+b = Vector2( 3000, 0 )
+
 [node name="game" type="Node2D"]
 script = ExtResource( 1 )
 enemy1_scene = ExtResource( 2 )
@@ -99,11 +105,14 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 3000, 3000 )
 
 [node name="player" type="RigidBody2D" parent="."]
-position = Vector2( 140, 70 )
+position = Vector2( 140, -30 )
 gravity_scale = 0.0
 linear_damp = 1.0
 angular_damp = 2.0
 script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
 bullet_scene = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="player"]
@@ -150,6 +159,7 @@ margin_bottom = 28.5952
 text = "Enemies"
 
 [node name="game_over_hbox" type="HBoxContainer" parent="ui"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 320.0
 margin_bottom = 179.0
@@ -183,3 +193,43 @@ drag_margin_v_enabled = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/game over" = SubResource( 7 )
+
+[node name="walls" type="Node2D" parent="." groups=[
+"wall",
+]]
+position = Vector2( -1500, 1500 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="walls" groups=[
+"wall",
+]]
+editor/display_folded = true
+position = Vector2( 0, -3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D"]
+shape = SubResource( 8 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="walls" groups=[
+"wall",
+]]
+editor/display_folded = true
+position = Vector2( 3000, -3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D2"]
+shape = SubResource( 8 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="walls" groups=[
+"wall",
+]]
+editor/display_folded = true
+position = Vector2( 0, -3000 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D3"]
+shape = SubResource( 9 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="walls" groups=[
+"wall",
+]]
+editor/display_folded = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/StaticBody2D4"]
+shape = SubResource( 9 )
