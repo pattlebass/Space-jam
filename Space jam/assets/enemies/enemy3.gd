@@ -2,6 +2,9 @@ extends "res://assets/enemies/enemy1.gd"
 
 export (PackedScene) var bullet_scene
 
+func _ready():
+	sides = 6
+
 func _process(_delta):
 	rotation_degrees = 0
 	if global_position.distance_to(player.global_position) <= 50:
@@ -13,6 +16,7 @@ func _process(_delta):
 			bullet.rotation = get_node(str(i)).rotation
 			bullet.damage = damage
 			bullet.parent_type = "enemy"
-		queue_free()
+			bullet.speed = 150
+		destroy()
 	else:
 		speed = 20

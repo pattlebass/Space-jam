@@ -6,6 +6,8 @@ func _ready():
 	$Timer.start(rand_range(2, 3))
 	randomize()
 	damage = 1
+	hp = 1
+	sides = 3
 
 func _process(_delta):
 	if global_position.distance_to(player.global_position) <= 50:

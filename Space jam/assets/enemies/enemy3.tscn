@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/enemies/enemy3.gd" type="Script" id=1]
 [ext_resource path="res://assets/bullet.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/enemies/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/enemies/3.png" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
 
 [node name="enemy3" type="KinematicBody2D"]
 script = ExtResource( 1 )
 bullet_scene = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )
 

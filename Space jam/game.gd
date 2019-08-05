@@ -1,5 +1,7 @@
 extends Node2D
 
+var over = false
+var once = false
 var enemies = 0
 onready var player = $player
 export (PackedScene) var enemy1_scene
@@ -11,14 +13,20 @@ func _ready():
 	randomize()
 
 func _process(_delta):
+	$ui/enemies.text = str(enemies)
+	if over:
+		if Input.is_action_just_pressed("restart"):
+			get_tree().change_scene("res://game.tscn")
+		if once == false:
+			$AnimationPlayer.play("game over")
+			once = true
+		return
 	if Input.is_action_just_pressed("zoom"):
 		zoomed = !zoomed
 		if zoomed == false:
-			$player/Camera2D.zoom = Vector2(8, 8)
+			$player/Camera2D.zoom = Vector2(6, 6)
 		else:
 			$player/Camera2D.zoom = Vector2(1, 1)
-	$ui/HP.text = str(player.hp)
-	$ui/enemies.text = str(enemies)
 	if enemies < 70:
 		var repeats = 70 - enemies
 		for i in repeats:

@@ -13,4 +13,8 @@ func _on_Timer_timeout():
 func _on_Area2D_body_entered(body):
 	if body.type != parent_type:
 		body.hp -= damage
-		queue_free()
+		modulate = body.get_node("Sprite").modulate
+		$Particles2D.emitting = true
+		$Area2D/CollisionShape2D.queue_free()
+		$Sprite.queue_free()
+		speed = 0
