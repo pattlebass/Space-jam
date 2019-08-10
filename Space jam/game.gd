@@ -1,5 +1,6 @@
 extends Node2D
 
+var start = true
 var over = false
 var once = false
 var enemies = 0
@@ -13,14 +14,22 @@ func _ready():
 	randomize()
 
 func _process(_delta):
-	$ui/enemies.text = str(enemies)
+	#print(global.high_score)
+	if start && Input.is_action_just_pressed("restart"):
+		$AnimationPlayer.play("start")
+		start = false
 	if over:
+		$ui/game_over_hbox/VBoxContainer/HiScore.text = "Highscore: " + str(global.high_score)
+		if global.score > global.high_score:
+			global.high_score = global.score
+			global.score = 0
 		if Input.is_action_just_pressed("restart"):
 			get_tree().change_scene("res://game.tscn")
 		if once == false:
 			$AnimationPlayer.play("game over")
 			once = true
 		return
+	$ui/Score.text = str(global.score)
 	if Input.is_action_just_pressed("zoom"):
 		zoomed = !zoomed
 		if zoomed == false:

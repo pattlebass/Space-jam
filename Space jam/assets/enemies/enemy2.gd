@@ -8,6 +8,7 @@ func _ready():
 	damage = 1
 	hp = 1
 	sides = 3
+	score = 200
 
 func _process(_delta):
 	if global_position.distance_to(player.global_position) <= 50:
@@ -23,4 +24,5 @@ func _on_Timer_timeout():
 		bullet.rotation = rotation
 		bullet.damage = damage
 		bullet.parent_type = "enemy"
+		$shoot.play()
 	$Timer.start(rand_range(2, 3))

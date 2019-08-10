@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/enemies/enemy2.gd" type="Script" id=1]
 [ext_resource path="res://assets/bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/enemies/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/shoot enemy.wav" type="AudioStream" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -25,4 +26,8 @@ shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -30.0
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

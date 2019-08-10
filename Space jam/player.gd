@@ -10,7 +10,10 @@ var thrust = Vector2()
 #var rotation_direction = 0
 export (PackedScene) var bullet_scene
 func _physics_process(delta):
-	get_parent().get_node("ui/HP").text = str(hp)
+	if game.start:
+		return
+	#get_parent().get_node("ui/HP").text = str(hp)
+	$TextureProgress.value = hp * 10
 	if hp <= 0:
 		destroy()
 	get_input()
@@ -29,19 +32,18 @@ func get_input():
 		bullet.parent_type = "player"
 		bullet.damage = damage
 		bullet.modulate = $Sprite.modulate
+		$shoot.play()
+		
 
-	#if Input.is_action_pressed("left"):
-	#	rotation_direction = -1
-	#elif Input.is_action_pressed("right"):
-	#	rotation_direction = 1
-	#else:
-	#	rotation_direction = 0
 	
 func _integrate_forces(state):
+	if game.start:
+		return
 	look_at(get_global_mouse_position())
 	set_applied_force(thrust.rotated(rotation))
-	#set_applied_torque(rotation_direction * turning_speed)
+	
 func destroy():
+	game.get_node("explosion").play()
 	var particle_scene = preload("res://assets/particles.tscn")
 	var particle = particle_scene.instance()
 	game.add_child(particle)
@@ -52,3 +54,7 @@ func destroy():
 	camera_after_death.current = true
 	camera_after_death.global_position = position
 	queue_free()
+
+func hp_bar():
+	$hurt.play()
+	get_parent().get_node("AnimationPlayer").play("hide_hp_bar")

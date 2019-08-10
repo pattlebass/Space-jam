@@ -4,6 +4,7 @@ export (PackedScene) var bullet_scene
 
 func _ready():
 	sides = 6
+	score = 150
 
 func _process(_delta):
 	rotation_degrees = 0
@@ -17,6 +18,7 @@ func _process(_delta):
 			bullet.damage = damage
 			bullet.parent_type = "enemy"
 			bullet.speed = 150
-		destroy()
+		destroy("explosion_player")
+		$shoot.play()
 	else:
 		speed = 20

@@ -5,6 +5,8 @@ var damage
 var parent_type
 
 func _physics_process(delta):
+	if get_parent().over:
+		queue_free()
 	move_and_collide(Vector2(1, 0).rotated(rotation) * speed * delta)
 
 func _on_Timer_timeout():
@@ -20,3 +22,5 @@ func _on_Area2D_body_entered(body):
 		$Area2D/CollisionShape2D.queue_free()
 		$Sprite.queue_free()
 		speed = 0
+	if body.has_method("hp_bar"):
+		body.hp_bar()
